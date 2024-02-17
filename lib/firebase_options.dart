@@ -50,21 +50,21 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBeszZHLYJNyjUhpujMH9yZ4ol9JqsAmPU',
-    appId: '1:288842837392:android:1353619813061d867a5715',
-    messagingSenderId: '288842837392',
-    projectId: 'we-chat-75f13',
-    storageBucket: 'we-chat-75f13.appspot.com',
+    apiKey: 'AIzaSyDqP0SPQgPAyboWF5zwalPvjwH_7avFnG4',
+    appId: '1:891928417468:android:473ebe2bafb84ca94aacb9',
+    messagingSenderId: '891928417468',
+    projectId: 'we-chat-6c625',
+    storageBucket: 'we-chat-6c625.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCCYZoZ5DvuitZJ7qK5iWM3ARHBDoFFriY',
-    appId: '1:288842837392:ios:f39c8dc31525a6687a5715',
-    messagingSenderId: '288842837392',
-    projectId: 'we-chat-75f13',
-    storageBucket: 'we-chat-75f13.appspot.com',
-    androidClientId: '288842837392-gvt1l790g0t1fmnurc5pmko3oss8b1tq.apps.googleusercontent.com',
-    iosClientId: '288842837392-sgib97u6439i4jte3bo19u00fh663euu.apps.googleusercontent.com',
+    apiKey: 'AIzaSyDJz2YDv_uoSS-eLDMFHFMnluz_ZmhrHL4',
+    appId: '1:891928417468:ios:ae26c39d174086264aacb9',
+    messagingSenderId: '891928417468',
+    projectId: 'we-chat-6c625',
+    storageBucket: 'we-chat-6c625.appspot.com',
+    androidClientId: '891928417468-0ajd98n9122anfr1pgd337f2rjlhpu75.apps.googleusercontent.com',
+    iosClientId: '891928417468-9d4i6tsg3dp3600euhudtenpd9e7qto2.apps.googleusercontent.com',
     iosBundleId: 'com.harshRajpurohit.weChat',
   );
 }

@@ -1,45 +1,45 @@
 {
   "project_info": {
-    "project_number": "288842837392",
-    "project_id": "we-chat-75f13",
-    "storage_bucket": "we-chat-75f13.appspot.com"
+    "project_number": "891928417468",
+    "project_id": "we-chat-6c625",
+    "storage_bucket": "we-chat-6c625.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:288842837392:android:1353619813061d867a5715",
+        "mobilesdk_app_id": "1:891928417468:android:473ebe2bafb84ca94aacb9",
         "android_client_info": {
           "package_name": "com.harshRajpurohit.we_chat"
         }
       },
       "oauth_client": [
         {
-          "client_id": "288842837392-gvt1l790g0t1fmnurc5pmko3oss8b1tq.apps.googleusercontent.com",
+          "client_id": "891928417468-0ajd98n9122anfr1pgd337f2rjlhpu75.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.harshRajpurohit.we_chat",
-            "certificate_hash": "aa1014c75d3bcbaeff8097b6786a5633ee826e9b"
+            "certificate_hash": "7b5e72db0c790834bac948f3c10d8739f491c2b6"
           }
         },
         {
-          "client_id": "288842837392-tib1k52rlca0mlq4jr3iil7apgvcc5jt.apps.googleusercontent.com",
+          "client_id": "891928417468-sivprt3roqn9cgl72unet7mo43t7sa99.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBeszZHLYJNyjUhpujMH9yZ4ol9JqsAmPU"
+          "current_key": "AIzaSyDqP0SPQgPAyboWF5zwalPvjwH_7avFnG4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "288842837392-tib1k52rlca0mlq4jr3iil7apgvcc5jt.apps.googleusercontent.com",
+              "client_id": "891928417468-sivprt3roqn9cgl72unet7mo43t7sa99.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "288842837392-sgib97u6439i4jte3bo19u00fh663euu.apps.googleusercontent.com",
+              "client_id": "891928417468-9d4i6tsg3dp3600euhudtenpd9e7qto2.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.harshRajpurohit.weChat"
