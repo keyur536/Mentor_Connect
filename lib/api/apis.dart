@@ -30,6 +30,8 @@ class APIs {
       image: user.photoURL.toString(),
       createdAt: '',
       isOnline: false,
+      isMentor: false,
+      mentorid: '',
       lastActive: '',
       pushToken: '');
 
@@ -143,6 +145,14 @@ class APIs {
   // for creating a new user
   static Future<void> createUser() async {
     final time = DateTime.now().millisecondsSinceEpoch.toString();
+    // dynamic mentorid = assignMentorToUsers(String id, bool isMentor);
+
+   assignMentorToUsers(id, isMentor) {
+  if(isMentor != true)
+  {return id+DateTime.now().millisecondsSinceEpoch.toString();
+  }else {
+    return null;
+  }}
 
     final chatUser = ChatUser(
         id: user.uid,
@@ -152,6 +162,8 @@ class APIs {
         image: user.photoURL.toString(),
         createdAt: time,
         isOnline: false,
+        isMentor: false,
+        mentorid: '',
         lastActive: time,
         pushToken: '');
 
@@ -344,3 +356,7 @@ class APIs {
         .update({'msg': updatedMsg});
   }
 }
+
+
+  
+

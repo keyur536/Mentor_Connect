@@ -5,6 +5,8 @@ class ChatUser {
     required this.name,
     required this.createdAt,
     required this.isOnline,
+    required this.isMentor,
+    required this.mentorid,
     required this.id,
     required this.lastActive,
     required this.email,
@@ -15,6 +17,8 @@ class ChatUser {
   late String name;
   late String createdAt;
   late bool isOnline;
+  late bool isMentor;
+  late String mentorid;
   late String id;
   late String lastActive;
   late String email;
@@ -26,6 +30,7 @@ class ChatUser {
     name = json['name'] ?? '';
     createdAt = json['created_at'] ?? '';
     isOnline = json['is_online'] ?? '';
+    isMentor = json['is_mentor'] ?? '';
     id = json['id'] ?? '';
     lastActive = json['last_active'] ?? '';
     email = json['email'] ?? '';
@@ -39,6 +44,7 @@ class ChatUser {
     data['name'] = name;
     data['created_at'] = createdAt;
     data['is_online'] = isOnline;
+    data['is_mentor'] = isMentor;
     data['id'] = id;
     data['last_active'] = lastActive;
     data['email'] = email;

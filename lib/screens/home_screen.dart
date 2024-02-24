@@ -132,66 +132,139 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
 
           //body
-          body: StreamBuilder(
-            stream: APIs.getMyUsersId(),
+          body: Column(
+              children: [
+              StreamBuilder(
+                stream: APIs.getMyUsersId(),
 
-            //get id of only known users
-            builder: (context, snapshot) {
-              switch (snapshot.connectionState) {
-                //if data is loading
-                case ConnectionState.waiting:
-                case ConnectionState.none:
-                  return const Center(child: CircularProgressIndicator());
+                //get id of only known users
+                builder: (context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    //if data is loading
+                    case ConnectionState.waiting:
+                    case ConnectionState.none:
+                      return const Center(child: CircularProgressIndicator());
 
-                //if some or all data is loaded then show it
-                case ConnectionState.active:
-                case ConnectionState.done:
-                  return StreamBuilder(
-                    stream: APIs.getAllUsers(
-                        snapshot.data?.docs.map((e) => e.id).toList() ?? []),
+                    //if some or all data is loaded then show it
+                    case ConnectionState.active:
+                    case ConnectionState.done:
+                      return StreamBuilder(
+                        stream: APIs.getAllUsers(
+                            snapshot.data?.docs.map((e) => e.id).toList() ??
+                                []),
+                        //get only those user, who's ids are provided
+                        builder: (context, snapshot) {
+                          switch (snapshot.connectionState) {
+                            //if data is loading
+                            case ConnectionState.waiting:
+                            case ConnectionState.none:
+                            // return const Center(
+                            //     child: CircularProgressIndicator());
 
-                    //get only those user, who's ids are provided
-                    builder: (context, snapshot) {
-                      switch (snapshot.connectionState) {
-                        //if data is loading
-                        case ConnectionState.waiting:
-                        case ConnectionState.none:
-                        // return const Center(
-                        //     child: CircularProgressIndicator());
+                            //if some or all data is loaded then show it
+                            case ConnectionState.active:
+                            case ConnectionState.done:
+                              // final data = snapshot.data?.docs;
+                              // _list = data
+                              //         ?.map((e) => ChatUser.fromJson(e.data()['email']=='keyurdev45@gmail.com'?))
+                              //         .toList() ??
+                              //     [];
 
-                        //if some or all data is loaded then show it
-                        case ConnectionState.active:
-                        case ConnectionState.done:
-                          final data = snapshot.data?.docs;
-                          _list = data
-                                  ?.map((e) => ChatUser.fromJson(e.data()))
-                                  .toList() ??
-                              [];
+                              var usersbase = await db.collection("users").withConverter(
+                              fromFirestore: UserData.fromFirestore,
+                              toFirestore: (UserData userdata, options) => userdata.toFirestore(),
+                              ).where("name", isEqualTo: Keyur).get();
 
-                          if (_list.isNotEmpty) {
-                            return ListView.builder(
-                                itemCount: _isSearching
-                                    ? _searchList.length
-                                    : _list.length,
-                                padding: EdgeInsets.only(top: mq.height * .01),
-                                physics: const BouncingScrollPhysics(),
-                                itemBuilder: (context, index) {
-                                  return ChatUserCard(
-                                      user: _isSearching
-                                          ? _searchList[index]
-                                          : _list[index]);
-                                });
-                          } else {
-                            return const Center(
-                              child: Text('No Connections Found!',
-                                  style: TextStyle(fontSize: 20)),
-                            );
+                              if (_list.isNotEmpty) {
+                                return ListView.builder(
+                                    itemCount: _isSearching
+                                        ? _searchList.length
+                                        : _list.length,
+                                    padding:
+                                        EdgeInsets.only(top: mq.height * .01),
+                                    physics: const BouncingScrollPhysics(),
+                                    itemBuilder: (context, index) {
+                                      return ChatUserCard(
+                                          user: _isSearching
+                                              ? _searchList[index]
+                                              : _list[index]);
+                                    });
+                              } else {
+                                return const Center(
+                                  child: Text('No Connections Found!',
+                                      style: TextStyle(fontSize: 20)),
+                                );
+                              }
                           }
-                      }
-                    },
-                  );
-              }
-            },
+                        },
+                      );
+                  }
+                },
+              ),
+              StreamBuilder(
+                stream: APIs.getMyUsersId(),
+              
+                //get id of only known users
+                builder: (context, snapshot) {
+                  switch (snapshot.connectionState) {
+                    //if data is loading
+                    case ConnectionState.waiting:
+                    case ConnectionState.none:
+                      return const Center(child: CircularProgressIndicator());
+              
+                    //if some or all data is loaded then show it
+                    case ConnectionState.active:
+                    case ConnectionState.done:
+                      return StreamBuilder(
+                        stream: APIs.getAllUsers(
+                            snapshot.data?.docs.map((e) => e.id).toList() ?? []),
+              
+                        //get only those user, who's ids are provided
+                        builder: (context, snapshot) {
+                          switch (snapshot.connectionState) {
+                            //if data is loading
+                            case ConnectionState.waiting:
+                            case ConnectionState.none:
+                            // return const Center(
+                            //     child: CircularProgressIndicator());
+              
+                            //if some or all data is loaded then show it
+                            case ConnectionState.active:
+                            case ConnectionState.done:
+                              final data = snapshot.data?.docs;
+                              _list = data
+                                      ?.map((e) => ChatUser.fromJson(e.data()))
+                                      .toList() ??
+                                      
+                                  [];
+                                 ChatUser _list2 = _list{'name':'keyur'};
+              
+                              if (_list.isNotEmpty) {
+                                return ListView.builder(
+                                    itemCount: _isSearching
+                                        ? _searchList.length
+                                        : _list.length,
+                                    padding: EdgeInsets.only(top: mq.height * .01),
+                                    physics: const BouncingScrollPhysics(),
+                                    itemBuilder: (context, index) {
+                                      return ChatUserCard(
+                                          user: _isSearching
+                                              ? _searchList[index]
+                                              : _list[index]);
+                                    });
+                              } else {
+                                return const Center(
+                                  child: Text('No Connections Found!',
+                                      style: TextStyle(fontSize: 20)),
+                                );
+                              }
+                          }
+                        },
+                      );
+                  }
+                },
+              ),
+            ],
           ),
         ),
       ),
