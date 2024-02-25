@@ -1,20 +1,21 @@
 name: we_chat
 description: A new Flutter project.
 
-publish_to: "none"
+publish_to: 'none'
 
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.18.4 <3.0.0"
+  sdk: '>=2.18.4 <3.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
 
+
   # For using cupertino icons
   cupertino_icons: ^1.0.2
-
+  
   # For integrating firebase
   firebase_core: ^2.2.0
 
@@ -51,23 +52,26 @@ dependencies:
   # For storing images into gallery
   gallery_saver: ^2.3.2
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  #   flutter_launcher_icons: "^0.10.0"
+#   flutter_launcher_icons: "^0.10.0"
 
-  # flutter_icons:
-  #   android: "ic_launcher"
-  #   ios: true
-  #   image_path: "images/icon.png"
-  #   min_sdk_android: 21
-  #   remove_alpha_ios: true
+# flutter_icons:
+#   android: "ic_launcher"
+#   ios: true
+#   image_path: "images/icon.png"
+#   min_sdk_android: 21
+#   remove_alpha_ios: true
+  
 
   # For recommended coding practices
   flutter_lints: ^3.0.1
 
 flutter:
+
   # For enabling material design
   uses-material-design: true
 

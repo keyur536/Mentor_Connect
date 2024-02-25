@@ -133,6 +133,7 @@ class APIs {
       if (user.exists) {
         me = ChatUser.fromJson(user.data()!);
         await getFirebaseMessagingToken();
+
         //for setting user status to active
         APIs.updateActiveStatus(true);
         log('My Data: ${user.data()}');

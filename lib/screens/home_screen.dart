@@ -170,10 +170,10 @@ class _HomeScreenState extends State<HomeScreen> {
                               //         .toList() ??
                               //     [];
 
-                              var usersbase = await db.collection("users").withConverter(
-                              fromFirestore: UserData.fromFirestore,
-                              toFirestore: (UserData userdata, options) => userdata.toFirestore(),
-                              ).where("name", isEqualTo: Keyur).get();
+                              // var usersbase = await db.collection("users").withConverter(
+                              // fromFirestore: UserData.fromFirestore,
+                              // toFirestore: (UserData userdata, options) => userdata.toFirestore(),
+                              // ).where("name", isEqualTo: Keyur).get();
 
                               if (_list.isNotEmpty) {
                                 return ListView.builder(
@@ -237,7 +237,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       .toList() ??
                                       
                                   [];
-                                 ChatUser _list2 = _list{'name':'keyur'};
+                                //  ChatUser _list2 = _list{'name':'keyur'};
               
                               if (_list.isNotEmpty) {
                                 return ListView.builder(
