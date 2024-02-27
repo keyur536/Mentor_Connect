@@ -58,6 +58,33 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
+  // for mentor
+  _handleGoogleBtnClickForMentor() {
+    //for showing progress bar
+    Dialogs.showProgressBar(context);
+
+    _signInWithGoogle().then((user) async {
+      //for hiding progress bar
+      Navigator.pop(context);
+
+      if (user != null) {
+        log('\nUser: ${user.user}');
+        log('\nUserAdditionalInfo: ${user.additionalUserInfo}');
+
+        if ((await APIs.userExists())) {
+          // ignore: use_build_context_synchronously
+          Navigator.pushReplacement(
+              context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+        } else {
+          await APIs.createMentor().then((value) {
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+          });
+        }
+      }
+    });
+  }
+
   Future<UserCredential?> _signInWithGoogle() async {
     try {
       await InternetAddress.lookup('google.com');
@@ -111,7 +138,38 @@ class _LoginScreenState extends State<LoginScreen> {
             duration: const Duration(seconds: 1),
             child: Image.asset('images/icon.png')),
 
-        //google login button
+//google login button for Mentor
+
+        Positioned(
+            bottom: mq.height * .25,
+            left: mq.width * .05,
+            width: mq.width * .9,
+            height: mq.height * .06,
+            child: ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 223, 255, 187),
+                    shape: const StadiumBorder(),
+                    elevation: 1),
+                onPressed: () {
+                  _handleGoogleBtnClickForMentor();
+                },
+
+                //google icon
+                icon: Image.asset('images/google.png', height: mq.height * .03),
+
+                //login with google label
+                label: RichText(
+                  text: const TextSpan(
+                      style: TextStyle(color: Colors.black, fontSize: 16),
+                      children: [
+                        TextSpan(text: 'Login as '),
+                        TextSpan(
+                            text: 'Mentor',
+                            style: TextStyle(fontWeight: FontWeight.w500)),
+                      ]),
+                ))),
+
+        //google login button for Mentee
         Positioned(
             bottom: mq.height * .15,
             left: mq.width * .05,
@@ -134,9 +192,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   text: const TextSpan(
                       style: TextStyle(color: Colors.black, fontSize: 16),
                       children: [
-                        TextSpan(text: 'Login with '),
+                        TextSpan(text: 'Login as '),
                         TextSpan(
-                            text: 'Google',
+                            text: 'Mentee',
                             style: TextStyle(fontWeight: FontWeight.w500)),
                       ]),
                 ))),
