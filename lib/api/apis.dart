@@ -30,6 +30,8 @@ class APIs {
       image: user.photoURL.toString(),
       createdAt: '',
       isOnline: false,
+      isMentor: false,
+      isMentorAssigned: false,
       lastActive: '',
       pushToken: '');
 
@@ -72,9 +74,6 @@ class APIs {
           "body": msg,
           "android_channel_id": "chats"
         },
-        // "data": {
-        //   "some_data": "User ID: ${me.id}",
-        // },
       };
 
       var res = await post(Uri.parse('https://fcm.googleapis.com/fcm/send'),
@@ -125,11 +124,24 @@ class APIs {
     }
   }
 
+  static Future<void> updateIsMentorAssigned(String userId) async {
+    try {
+      DocumentReference userRef =
+          FirebaseFirestore.instance.collection('users').doc(userId);
+      await userRef.update({
+        'is_mentor_assigned': true,
+      });
+      print('is_mentor_assigned updated successfully!');
+    } catch (e) {}
+  }
+
   // for getting current user info
-  static Future<void> getSelfInfo() async {
+  static Future<bool> getSelfInfo() async {
+    bool isMentor = false;
     await firestore.collection('users').doc(user.uid).get().then((user) async {
       if (user.exists) {
         me = ChatUser.fromJson(user.data()!);
+        isMentor = me.isMentor;
         await getFirebaseMessagingToken();
         //for setting user status to active
         APIs.updateActiveStatus(true);
@@ -138,6 +150,7 @@ class APIs {
         await createUser().then((value) => getSelfInfo());
       }
     });
+    return isMentor;
   }
 
   // for creating a new user
@@ -152,13 +165,38 @@ class APIs {
         image: user.photoURL.toString(),
         createdAt: time,
         isOnline: false,
+        isMentor: false,
+        isMentorAssigned: false,
         lastActive: time,
         pushToken: '');
 
     return await firestore
         .collection('users')
         .doc(user.uid)
-        .set(chatUser.toJson());
+        .set(chatUser.toJson(), SetOptions(merge: true));
+  }
+
+//Creating Mentor
+  static Future<void> createMentor() async {
+    final time = DateTime.now().millisecondsSinceEpoch.toString();
+
+    final chatUser = ChatUser(
+        id: user.uid,
+        name: user.displayName.toString(),
+        email: user.email.toString(),
+        about: "Hey, I am the Mentor",
+        image: user.photoURL.toString(),
+        createdAt: time,
+        isOnline: false,
+        isMentor: true,
+        isMentorAssigned: false,
+        lastActive: time,
+        pushToken: '');
+
+    return await firestore
+        .collection('users')
+        .doc(user.uid)
+        .set(chatUser.toJson(), SetOptions(merge: true));
   }
 
   // for getting id's of known users from firestore database
@@ -170,11 +208,35 @@ class APIs {
         .snapshots();
   }
 
+  static Future<Map<String, dynamic>?> getUserById(String userId) async {
+    try {
+      // Get a reference to the user document using the provided user ID
+      DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userId)
+          .get();
+
+      // Check if the document exists
+      if (userSnapshot.exists) {
+        // Access the data and return the user ID
+        Map<String, dynamic> userData =
+            userSnapshot.data() as Map<String, dynamic>;
+        return userData;
+      } else {
+        // Document with the given user ID does not exist
+        return null;
+      }
+    } catch (e) {
+      print('Error getting user by ID: $e');
+      // Handle the error as needed
+      return null;
+    }
+  }
+
   // for getting all users from firestore database
   static Stream<QuerySnapshot<Map<String, dynamic>>> getAllUsers(
       List<String> userIds) {
     log('\nUserIds: $userIds');
-
     return firestore
         .collection('users')
         .where('id',
@@ -182,6 +244,15 @@ class APIs {
                 ? ['']
                 : userIds) //because empty list throws an error
         // .where('id', isNotEqualTo: user.uid)
+        .snapshots();
+  }
+
+// to get all mentors
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getMentors() {
+    return firestore
+        .collection('users')
+        .where('is_mentor', isEqualTo: true)
+        // Use whereIn for filtering with a list
         .snapshots();
   }
 
@@ -202,6 +273,15 @@ class APIs {
       'name': me.name,
       'about': me.about,
     });
+  }
+
+//update the mentors as isMentor
+
+  static Future<void> updateasMentor() async {
+    await firestore
+        .collection('users')
+        .doc(user.uid)
+        .update({'is_mentor': true});
   }
 
   // update profile picture of user
