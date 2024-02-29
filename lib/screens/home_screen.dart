@@ -218,13 +218,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                       onPressed: () {
                                         log("button pressed");
                                         _loadMentorsList();
-                                        // _getAllUsers();
-                                        // // List<String> mentorData = [
-                                        // //   'id1',
-                                        // //   'id2',
-                                        // //   'id3'
-                                        // // ]; // Replace with actual data
-                                        // // _getAllMentors(mentorData);
                                       },
                                       child: Text('Need a Mentor'),
                                     )

@@ -110,12 +110,6 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  //sign out function
-  // _signOut() async {
-  //   await FirebaseAuth.instance.signOut();
-  //   await GoogleSignIn().signOut();
-  // }
-
   @override
   Widget build(BuildContext context) {
     //initializing media query (for getting device screen size)
@@ -125,7 +119,7 @@ class _LoginScreenState extends State<LoginScreen> {
       //app bar
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text('Welcome to We Chat'),
+        title: const Text('Welcome to Mentor Connect'),
       ),
 
       //body
